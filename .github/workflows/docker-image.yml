@@ -21,8 +21,6 @@ jobs:
         password: ${{ secrets.DOCKER_TOKEN }}
     - name: Create timestamp
       run: echo "TIMESTAMP=$(date +%s)" >> $GITHUB_ENV
-    - name: Print timestamp
-      run: echo $TIMESTAMP
     - name: Build the Docker image
       run: docker buildx build -f Dockerfile --tag pusti/rso2324-team22-resource-service:$TIMESTAMP .
     - name: Make the `latest` tag
