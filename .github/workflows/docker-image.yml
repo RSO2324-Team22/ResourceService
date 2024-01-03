@@ -7,7 +7,7 @@ on:
     branches: [ "main" ]
 
 env:
-  TIMESTAMP: $(date +%s)
+  TIMESTAMP: date +%s
 
 jobs:
 
@@ -23,12 +23,12 @@ jobs:
         username: pusti
         password: ${{ secrets.DOCKER_TOKEN }}
     - name: Print timestamp
-      run: echo $TIMESTAMP
+      run: echo $(TIMESTAMP)
     - name: Build the Docker image
-      run: docker buildx build -f Dockerfile --tag pusti/rso2324-team22-resource-service:$TIMESTAMP .
+      run: docker buildx build -f Dockerfile --tag pusti/rso2324-team22-resource-service:$(TIMESTAMP) .
     - name: Make the `latest` tag
       run: docker buildx build -f Dockerfile --tag pusti/rso2324-team22-resource-service:latest .
     - name: Push Docker image
-      run: docker push pusti/rso2324-team22-resource-service:$TIMESTAMP
+      run: docker push pusti/rso2324-team22-resource-service:$(TIMESTAMP)
     - name: Push the `latest` tag
       run: docker push pusti/rso2324-team22-resource-service:latest
