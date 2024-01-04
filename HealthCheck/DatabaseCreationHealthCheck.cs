@@ -15,6 +15,7 @@ public class DatabaseCreationHealthCheck : IHealthCheck
         this._logger = logger;
         this.dbContext = dbContext;
         this.dbCreationTask = dbContext.Database.EnsureCreatedAsync();
+        this.dbCreationTask.Start();
     }
 
     public Task<HealthCheckResult> CheckHealthAsync(HealthCheckContext context, CancellationToken cancellationToken = default)
